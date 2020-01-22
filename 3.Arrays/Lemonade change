@@ -1,0 +1,40 @@
+def lemonadeChange(self, bills: List[int]) -> bool:
+        
+        #initializing hashmap
+        hmap = {5:0,10:0}
+        
+        #iterating through the bills
+        for i in bills:
+            
+            #if 5, then increment 5's frequency
+            if i == 5:
+                hmap[i] += 1
+                print(hmap)
+            
+            # if 10, then increment 10's frequency and derement a 5
+            if i == 10:
+                hmap[i]+=1
+                
+                if hmap[5]<1:
+                    return False
+                
+                hmap[5] -= 1
+                print(hmap)
+            
+            
+            #if 20, then decrement a 10 and a five, or three fives if available
+            if i==20:
+                
+                if (hmap[10]>=1) & (hmap[5]>=1):
+                    hmap[10] -= 1
+                    hmap[5] -= 1
+              
+                elif hmap[5]>=3:
+                    hmap[5] -= 3
+                    
+                else:
+                    return False 
+         
+        return True       
+            
+        
