@@ -1,0 +1,25 @@
+def threeNumberSum(array, targetSum):
+    # Write your code here.
+
+
+	array.sort()    # sorting the array
+	answer = []     #initializing the triplet array
+	for i in range(0, len(array)-2):
+		
+    left = i+1     # incrementing the ith index for the left pointer
+		right = len(array) - 1  #setting the rightmost pointer
+		
+    while left<right:  # 
+			cur_sum = array[i] + array[left] + array[right]  #calculating the sum
+			
+      if cur_sum == targetSum:     #checking if the sum is equal to the target
+				answer.append([array[i],array[left],array[right]])    # appending the triplet
+				left+=1  #incrementing the left and right pointers
+				right-=1
+			elif cur_sum>targetSum:  #if sum> target sum, then decrementing the right pointer
+				right-=1    
+			elif cur_sum<targetSum:  if sum < target sum, then incrementing the left pointer
+				left+=1
+		
+	
+	return answer   #returning the answer
