@@ -1,0 +1,19 @@
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+    
+    
+    #approach to calculate the profits of all continuos stock trade
+    #initializing the total variable
+        total = 0
+        
+        #iterating through the prices list
+        for i in range(len(prices)-1):
+            
+            #calculating the profit for one trade 
+            if (prices[i] < prices[i+1]):
+                
+                #summing up the profits
+                total+= prices[i+1] - prices[i]
+        
+        #returning the total profit
+        return total
