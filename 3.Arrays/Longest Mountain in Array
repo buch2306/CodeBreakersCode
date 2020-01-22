@@ -1,0 +1,33 @@
+ def longestMountain(self, A: List[int]) -> int:
+        
+        # initializing the highest mountain range
+        highest = 0
+        
+        #pointer for tracking the left side of the mountain's peak
+        l=0
+        
+        #pointer for tracking the left side of the mountain's peak
+        r=0
+        
+        #iterating through the list
+        for i in range(1, len(A)-1):
+            
+            #identifying the peak, if it exists
+            if A[i+1] < A[i] > A[i-1]:
+                l = i
+                r = i
+                
+                #iterative process to find the starting point of the mountain on the left
+                while l and A[l] > A[l-1]:
+                    l-=1
+                
+                #iterative process to find the ending point of the mountain on the right
+                while r+1 < len(A) and A[r+1] < A[r]:
+                    r+=1
+                
+                #checking if the range is better than the highest
+                if r - l + 1 >highest:
+                    highest = r - l + 1
+        
+        #return the range of the mountain
+        return highest
