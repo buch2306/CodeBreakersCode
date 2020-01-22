@@ -1,0 +1,18 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        #potential jump initialized to 0
+        potentialjump = 0
+        
+        # enumerating the list
+        for i,v in enumerate (nums):
+            
+            # if the current index is greater than the potential jump, then return False
+            if i > potentialjump:
+                return False
+            
+            # if we encounter an element that provides a higher jump potential, then we replace it with our existing jump potential
+            potentialjump = max(potentialjump, i+v)
+        
+        return True
+            
+    
