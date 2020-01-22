@@ -1,9 +1,13 @@
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
+    
         prev = 0 #initializing counter that replaces duplicates with unique values
-        for i in range(0, len(nums)): #iterating through the list
-            if nums[i] != nums[prev]: #if the current number is not the same as the prev
-                prev+=1 #increment the prev counter
-                nums[prev] = nums[i] #assign the unique value to the duplicate value
+        
+        for i in range(0, len(nums)):   #iterating through the list
+        
+            if nums[i] != nums[prev]:   #if the current number is not the same as the prev
+            
+                prev+=1                   #increment the prev counter
+                nums[prev] = nums[i]      #assign the unique value to the duplicate value
         
         return prev+1 # return the length of the list
