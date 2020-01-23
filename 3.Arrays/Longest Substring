@@ -1,0 +1,29 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        
+        #initializing the start pointer and the max_length variable
+        max_length = 0
+        start = 0
+        
+        #initializing the hashmap
+        hmap = {}
+        
+        #iterating through the string
+        for i,v in enumerate (s):
+        
+        #if value already exists in the hashmap, increment the start pointer of the window
+            if v in hmap and start<=hmap[v]:
+                start = hmap[v]+1
+            
+            else:
+                max_length = max(max_length, i - start+1)   #counting the length of string with unique values
+      
+            
+            
+            #storing the index of each character in the hashmap
+            hmap[v] = i
+        
+        
+        #returning the max length
+        return max_length
+                
