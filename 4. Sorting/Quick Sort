@@ -1,0 +1,57 @@
+def quickSort(array):
+    # Write your code here.
+	
+  #helper function
+	def quicksort(array, l ,h):
+		
+    #base condition for recursion
+    if l>=h:
+			return
+		
+    #getting the pivot of the array
+		pivot = partition(array, l, h)
+		
+    #recursively setting the pivot for the left side of the array
+		quicksort(array, l, pivot -1)
+		
+    #recursively setting the pivot for the right side of the array
+    quicksort(array, pivot+1,h)
+	
+	def partition(array, l, h):
+		
+    #setting the pivot
+    pivot = array[l]
+		
+    #initializing the swap index
+    swap_index = l + 1
+		
+		
+    #iterating through the array
+    for i in range(l+1, h+1):
+			
+      #if element is lesser than the pivot
+      if array[i] < pivot:
+        
+        #swapping the array at the awap index
+				array[i], array[swap_index] = array[swap_index], array[i]
+				
+        #incrementing the swap index
+        swap_index += 1
+		
+    #swapping the pivot
+		array[swap_index -1], array[l] = array[l], array[swap_index - 1]
+	
+		#returning the pivot
+    return swap_index - 1
+	
+  #if length of the array is zero, return empty
+	if len(array)==0:
+		return []
+	
+  
+  #calling the helper function
+	quicksort(array, 0 , len(array)  - 1)
+	
+  #returning the sorted array
+  return array
+	
