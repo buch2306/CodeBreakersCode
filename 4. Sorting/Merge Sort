@@ -1,0 +1,64 @@
+def mergeSort(array):
+    # Write your code here.
+    def _mergesort(array, l, h):
+        
+        # base condition; low should always be less than or equal to high
+        if l>=h:
+            return
+        
+        # calculating the mid
+        m = (l+h)//2 + 1
+          
+         #dividing into left and right subarrays recursively
+        _mergesort(array, l, m-1)
+        _mergesort(array, m, h)
+        
+        #merging both left and right subarrays
+        merge(array, l, m , h)
+    
+    
+    #merge functions
+    def merge(array, l, m, h):
+        
+        #initializing the leftmost and middle pointers, along with the current pointer
+        start = l
+        m_end = m
+        cur  = l
+        copy = array[:]
+        
+        
+        # while current pointer does not exceed the rightmost element's index
+        while cur <= h:
+            
+            #iterating, comparing, and assigning elements to the array through comparison of both subarray's elements
+            if start < m and m_end <= h:
+                if copy[start] < copy[m_end]:
+                    array[cur] = copy[start]
+                    start += 1
+                else:
+                    array[cur] = copy[m_end]
+                    m_end += 1
+            
+            #if the right subarray has reached the end
+            elif start < m:
+                array[cur] = copy[start]
+                start += 1
+            
+            
+            #if the left subarray has reached the middle position
+            else:
+                array[cur] = copy[m_end]
+                m_end += 1
+        
+            cur += 1
+    
+    # if length of the array is equal to zero, return empty list
+    if len(array)==0:
+        return []
+    
+    
+    #calling the helper function
+    _mergesort(array, 0 , len(array) - 1)
+
+    #returning the array
+    return array
