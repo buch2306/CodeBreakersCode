@@ -1,0 +1,29 @@
+
+#checks for palindrome
+def isPalindrome(st):
+		start = 0
+		end = len(st) - 1
+		while start <= end:
+			if st[start] != st[end]:
+				return False
+			
+			start += 1
+			end -= 1
+		
+		
+		return True
+
+
+#iteratively cheks for longest substring
+def longestPalindromicSubstring(string):
+	longest = ''
+	for i in range(len(string)):
+		for j in range(i, len(string)):
+			substring = string [i: j+1]
+			if len(substring) > len(longest) and isPalindrome(substring):
+				longest = substring
+	
+	
+	return longest
+	
+	
