@@ -1,0 +1,29 @@
+def caesarCipherEncryptor(string, key):
+    # Write your code here.
+	count = []
+	num = 0
+	
+	#very important condition that solves an edge case when key exceeds 26
+	key = key % 26
+    	
+
+	#iterating through the string
+	for i,v in enumerate (string):
+		
+		# calculating the new position of the character
+		num = ord(v) + key
+		
+		#if number exceeds the alphabet size, then use the module operator to wrap
+		if num > ord('z'):
+			num = ord('a') + num % 122 - 1
+			count.append(chr(num))
+		
+		# else append to the count list	
+		else:
+			count.append(chr(num))
+
+	
+	# returning the string
+	return ''.join(count)
+		
+		
