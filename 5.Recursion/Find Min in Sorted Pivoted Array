@@ -1,0 +1,24 @@
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        
+        # defining the low and high variables for binary search
+        l = 0
+        r = len(nums) - 1
+        
+        
+        #checking the exit condition for binary search
+        while l < r:
+             
+            mid = (l+r)//2
+            
+            
+            #checking if the middle element is greater than the rightmost element, which would imply that we have the pivot to the left or the middle index
+            if nums[mid] > nums[r]:
+                l = mid + 1
+            
+            #else we reassign the high to be the mid
+            else:
+                r = mid
+        
+        
+        return nums[l]
