@@ -1,0 +1,11 @@
+def powerset(arr):
+  #base case
+  if not arr:
+    return [[]]
+  
+  # reducing the problem size
+  power = powerset(arr[1:])
+  
+  
+  #computing the subsets
+  return power + [[arr[0] + k for k in power]
