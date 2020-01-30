@@ -1,0 +1,20 @@
+class Solution:
+    
+    # main function
+    def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
+        return self._traverse(root, val)
+    
+    #insert into tree using recursive helper function
+    def _traverse(self, cur, val):
+        if cur is None:
+            cur = TreeNode(val)
+            return cur
+        
+        if val > cur.val:
+            cur.right = self._traverse(cur.right, val)
+        
+        elif val < cur.val:
+            cur.left = self._traverse(cur.left, val)
+        
+        
+        return cur
