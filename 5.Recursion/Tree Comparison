@@ -1,0 +1,24 @@
+
+#BFS, or level order traversal
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        stack = [(p,q)]
+        
+        while stack:
+            node1, node2 = stack.pop(0)
+            
+            if not node1 and not node2:
+                continue
+            
+            elif node1 and node2:
+                if node1.val != node2.val:
+                    return False
+                
+                stack.append((node1.left, node2.left))
+                stack.append((node1.right, node2.right))
+                    
+            
+            else:
+                return False
+        
+        return True
