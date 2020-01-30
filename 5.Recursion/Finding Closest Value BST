@@ -1,0 +1,27 @@
+def findClosestValueInBst(tree, target):
+    # Write your code here.
+	
+	#secondary function
+	def traverse(memo, tree, target):
+		
+		#if tree is None, then return garbage value
+		if tree is None:
+			return memo['min'][0]
+		
+
+		#target - current tree value, then set it
+		if abs(target - tree.value) < memo['min'][1]:
+			memo['min'][1]= abs(target - tree.value)
+			memo['min'][0] = tree.value
+		
+		#traversing through the right and left subtrees
+		traverse(memo, tree.left, target)
+		traverse(memo, tree.right, target)
+		return memo['min'][0]
+	
+	#initializing the memo
+	memo = {'min':[float('inf'), float('inf')]}
+	
+	
+	#returing the value
+	return traverse(memo, tree, target)
