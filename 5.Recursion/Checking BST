@@ -1,0 +1,17 @@
+def _BST(tree, min_val, max_val):
+
+		if tree is None:
+			return True
+
+		if tree.value < min_val or tree.value >= max_val: 
+			return False
+
+		left =  _BST(tree.left, min_val, tree.value)
+		right = _BST(tree.right, tree.value, max_val)
+
+		return left and right
+	
+	
+	return _BST(tree, min_val=float('-inf'), max_val = float('inf'))
+
+
