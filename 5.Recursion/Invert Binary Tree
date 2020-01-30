@@ -1,23 +1,15 @@
-
-#Inverting a binary tree
 def invertBinaryTree(tree):
-  
-  # initializing a list
-  q = [tree]
-  
-  # while queue is empty
-	while len(q):
+	q = [tree]
+	
+	while q:
+		node = q.pop(0)
 		
-    #popping element from queue
-    node=q.pop(0)
+		if node is None:
+		continue
 		
-    #if node is empty, continue
-    if node is None:
-			continue
+		node.right, node.left = node.left, node.right
 		
-    #swap elements
-    node.right, node.left = node.left, node.right
+		q.append(node.left)
+		q.append(node.right
 		
-    #then append to queue
-    q.append(node.left)
-		q.append(node.right)
+		
