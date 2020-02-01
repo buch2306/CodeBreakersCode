@@ -10,6 +10,6 @@ def invertBinaryTree(tree):
 		node.right, node.left = node.left, node.right
 		
 		q.append(node.left)
-		q.append(node.right
+		q.append(node.right)
 		
 		
