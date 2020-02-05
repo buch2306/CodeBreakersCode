@@ -1,0 +1,54 @@
+class Solution:
+    def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
+        
+        #importing collections
+        import collections
+        
+        #initializing outdegree and in_nodes dictectories
+        outdegree = collections.defaultdict(int)
+        in_nodes = collections.defaultdict(list)
+        
+        #initializing the queue and the result list 
+        queue = []
+        res = []
+        
+        
+        #traversing through the graph to get the in_nodes and the outdegree for all nodes in the graph
+        for i in range(len(graph)):
+
+            outdegree[i] = len(graph[i])
+            
+            #appending the nodes with outdegree=0 to our queue
+            if outdegree[i]==0:
+                queue.append(i)
+
+            #calculating the in_nodes
+            for j in graph[i]:
+                in_nodes[j].append(i)
+        
+        
+        #loop runs unti stack is empty
+        while queue:
+            
+            #pops the first element with outdegree=0
+            cur = queue.pop(0)
+            
+            #appends to the result set
+            res.append(cur)
+             
+             
+            #decrementing the outdegrees of connected nodes, and appending the nodes with outdegrees = 0 to the queue
+            for k in in_nodes[cur]:
+                outdegree[k] -= 1
+
+                if outdegree[k]==0:
+                    queue.append(k)
+
+        
+        #returning the result after sorting the list
+        return sorted(res)
+
+        
+    
+                
+                
