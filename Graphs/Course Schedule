@@ -1,0 +1,55 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        
+        #helper function that perform DFS
+        def cycle(cur):
+            
+            #checks if the element occurs in the current path
+            if cur in path:
+                return True
+            
+            #checks if the element has already been preocessed
+            if cur in visited:
+                return False
+            
+            
+            #adding element to the path
+            path.add(cur)
+            
+            
+            #sending the neighbour of cur to the cycle function
+            for v in adj_list[cur]:
+                
+                #return True if the neighbour already exists in the path set
+                if cycle(v):
+                    return True
+            
+            #processes the node; won't go down this path again
+            visited.add(cur)
+            
+            #removing element from the path
+            path.remove(cur)
+            
+            #returns False if there is no cycle in the path
+            return False
+        
+        #initializing the path and the visited sets
+        path = set()
+        visited = set()
+        
+        # creating the adjacency list
+        import collections
+        adj_list = collections.defaultdict(list)
+        for inc, out in prerequisites:
+            adj_list[out].append(inc)
+        
+        #loop to perform DFS
+        for i in range(numCourses):
+            
+            #returns True if there is cycle in the path
+            if cycle(i):
+                return False
+        
+        #returns False if there is no cycle in the course prerequisites
+        return True
+        
