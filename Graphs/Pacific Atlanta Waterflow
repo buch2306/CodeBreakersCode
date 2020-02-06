@@ -1,0 +1,87 @@
+class Solution:
+    def pacificAtlantic(self, matrix: List[List[int]]) -> List[List[int]]:
+        
+        #getting neighbours of the node
+        def getNeighbours(a,b,grid):
+            directions = [(1,0),(0,1),(-1,0),(0,-1)]
+            neighbours = []
+            m = len(matrix)
+            n = len(matrix[0])
+            for x,y in directions:
+                if 0<=x+a<m and 0<=y+b<n:
+                    if grid[a][b] <= grid[x+a][y+b]:
+                        neighbours.append((x+a,y+b))
+
+            return neighbours
+        
+        #getting all the elements that are on the left and top for pacific and right and bottom for atlantic 
+        def can_get_to_ocean(grid, is_pacific):
+            import collections
+            
+            #collects visited elements that can reach the ocean
+            cells_that_can_reach_ocean = set()
+            
+            #initializing the BFS queue
+            queue = collections.deque([])
+            
+            
+            #if pacific, we collect the elements on the left and the top
+            if is_pacific:
+                for j in range(len(matrix[0])):
+                    queue.append([0,j])
+                
+                for k in range(len(matrix)):
+                    queue.append([k,0])
+            
+            #if atlantic, we collect elements on the right and the bottom
+            else:
+                for j in range(len(matrix[0])):
+                    queue.append((len(matrix)-1,j))
+                
+                for k in range(len(matrix)):
+                    queue.append((k,len(matrix[0])-1))
+             
+             
+            #BFS on all collected nodes 
+            while queue:
+                x,y = queue.popleft()
+                
+                if (x,y) in cells_that_can_reach_ocean:
+                    continue
+                    
+                cells_that_can_reach_ocean.add((x,y))
+                
+                
+                for neighbour in getNeighbours(x,y,grid):
+                    queue.appendleft(neighbour)
+            
+            
+            #returning visited nodes that are also the elements that can reach the ocean
+            return cells_that_can_reach_ocean
+                
+        #handles edge case
+        if len(matrix)==0:
+            return []
+        
+        #initializing the results matrix
+        visit_matrix = []
+        
+        #getting elements that can reach the oceans
+        pacific_cells = can_get_to_ocean(matrix, is_pacific=True)
+        atlantic_cells = can_get_to_ocean(matrix, is_pacific=False)
+        
+        
+        #identifying elements that can reach both oceans
+        for cell in pacific_cells:
+            if cell in atlantic_cells:
+                one,two = cell
+                visit_matrix.append([one,two])
+        
+        #returning the result
+        return visit_matrix
+        
+        
+        
+                    
+        
+        
