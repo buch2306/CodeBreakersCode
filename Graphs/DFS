@@ -1,0 +1,18 @@
+def dfs(adj_list, source, dest):
+    def _dfs(cur, visited,dest):
+        if cur==dest:
+            return True
+        
+        if cur in visited:
+            return 
+        
+        visited.add(cur)
+        
+        for k in adj_list[cur]:
+            if _dfs(k, visited, dest):
+                return True
+          
+    visited = set()
+    for i in adj_list[source]:
+        return _dfs(i, visited,dest)
+        
