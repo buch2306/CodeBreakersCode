@@ -1,0 +1,49 @@
+"""
+# Employee info
+class Employee:
+    def __init__(self, id: int, importance: int, subordinates: List[int]):
+        # It's the unique id of each node.
+        # unique id of this employee
+        self.id = id
+        # the importance value of this employee
+        self.importance = importance
+        # the id of direct subordinates
+        self.subordinates = subordinates
+"""
+class Solution:
+    def getImportance(self, employees: List['Employee'], id: int) -> int:
+        
+        #DFS
+        def recsum(x,total):
+            total += imp[x]
+            if len(hier[x])==0:
+                return total
+            
+            for y in hier[x]:
+                total = recsum(y,total)
+            
+            return total
+        
+        
+        #building hierarchy and importance hashmaps
+        import collections
+        imp = collections.defaultdict(int)
+        hier = collections.defaultdict(list)
+        for i in employees:
+            imp[i.id] = i.importance
+        
+            for j in i.subordinates:
+                hier[i.id].append(j)
+        
+        #initializing total sum
+        total = 0 
+          
+          
+        #returns the recursive sum of the id  
+        return recsum(id,total) 
+        
+       
+            
+        
+        
+        
