@@ -1,0 +1,50 @@
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        
+        # getting the indexes of the rotten and the fresh oranges
+        def matrix(grid, val):
+            result = set()
+            for x in range(len(grid)):
+                for y in range(len(grid[0])):
+                    if grid[x][y]==val:
+                        result.add((x,y))
+            
+            
+            return result
+        
+        
+        fresh = matrix(grid,1)
+        rotten = matrix(grid, 2)
+        
+        
+        time=0
+        
+        # iterating until all the fresh elements are empty
+        while len(fresh)>0:
+            
+            #a set to keep track of elements that are turning
+            turned = set()
+            
+            #iterating through the fresh set
+            for x,y in fresh:
+                
+                #checks if there are any neighbours that are rotten, adds the current index to the turned set if yes
+                if (x+1,y) in rotten or (x,y+1) in rotten or (x-1,y) in rotten or (x,y-1) in rotten:
+                    turned.add((x,y))
+
+            #if nothing has turned, then fresh oranges are away from the rotten ones
+            if len(turned)==0:
+                    return -1
+
+            
+            #updating the fresh set
+            fresh.difference_update(turned)
+            
+            #updating the rotten set
+            rotten.update(turned)
+            
+            #incrementing the time counter
+            time+=1
+        
+        #returning the count
+        return time
