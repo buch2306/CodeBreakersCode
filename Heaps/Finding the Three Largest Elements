@@ -1,0 +1,26 @@
+def findThreeLargestNumbers(array):
+    # Write your code here.
+  
+  #importing the heapq package
+  import heapq
+	
+  #initializing the queue
+  st = []
+	
+  #iterating through the the first three numbers in the array and appending them to the min priorirty heap queue
+  for i in range(3):
+		heapq.heappush(st, array[i])
+	
+  
+  #iterating through the remaining elements and comparing each element with the first element in the queue, pop the queue if the num is greater
+	for k in array[3:]:
+		if k > st[0]:
+			heapq.heappop(st)
+			
+      #pushing the current element into the priority queue after popping the first element
+      heapq.heappush(st, k)
+			
+	
+  #returning the sorted list
+  return sorted(st)
+		
