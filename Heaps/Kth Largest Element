@@ -1,0 +1,43 @@
+import heapq
+
+class KthLargest:
+    
+    #constructor that initializes the priority queue
+    def __init__(self, k: int, nums: List[int]):
+        self.array = nums
+        self.limit = k
+        
+        
+        #heapifies the array
+        heapq.heapify(self.array)
+        
+        
+        #reduces the size of the min heap to k elements
+        while len(self.array) > self.limit:
+            heapq.heappop(self.array)
+        
+    
+    def add(self, val: int) -> int:
+        
+        #if k is greater than the size of the array, then push the value to the queue
+        if len(self.array) < self.limit:
+            heapq.heappush(self.array, val)
+        
+        # if not, then check if current val is greater than the first element of the array 
+        elif val > self.array[0]:
+            heapq.heappop(self.array)
+            heapq.heappush(self.array,val)
+        
+        #return the 0th element which is the kth largest element
+        return self.array[0]
+
+        
+        
+
+
+# Your KthLargest object will be instantiated and called as such:
+# obj = KthLargest(k, nums)
+# param_1 = obj.add(val)
+
+#obj = KthLargest(3, [4,5,8,2])
+
