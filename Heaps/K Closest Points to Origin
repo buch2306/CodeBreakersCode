@@ -1,0 +1,32 @@
+import heapq
+class Solution:
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        #initializing the distance variable
+        dist = 0
+        
+        #initializing the priority queue
+        heap = []
+        
+        
+        #iterating through the points
+        for x,y in points:
+            
+            #changing the sign to build a max heap
+            dist = -(x*x + y*y)
+            
+            #appending to the heap
+            heapq.heappush(heap, (dist,x,y))
+
+        #reducing the heap size to k elementx
+        while len(heap) > K:
+            heapq.heappop(heap)
+        
+      
+        #returning the result
+        return [[x,y] for d,x,y in heap]
+            
+            
+            
+            
+            
+        
