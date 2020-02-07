@@ -1,0 +1,31 @@
+class Solution:
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        
+        #dfs method
+        def _dfs(cur, visited):
+            
+            #if cur is in visited, return
+            if cur in visited:
+                return
+            
+            #adding to the visited set
+            visited.add(cur)
+            
+            #getting the keys to other rooms from the current room
+            keys = rooms[cur]
+             
+             
+            #going to the other rooms
+            for i in keys:
+                _dfs(i, visited)
+            
+            return
+
+        #initializing the visited set
+        visited = set()
+        
+        #calling the dfs method
+        _dfs(0, visited)
+        
+        #checking if the length of visited set is equal to the rooms matrix
+        return len(visited)==len(rooms)
