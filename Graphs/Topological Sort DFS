@@ -1,0 +1,42 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        def _dfs(cur, path, deq):
+            if cur in path:
+                return False
+            
+            if cur in visited:
+                return True
+            
+            visited.add(cur)
+            path.add(cur)
+            
+            if cur in course_list:
+                for n in course_list[cur]:
+                    if not _dfs(n, path, deq):
+                        return False
+            
+            deq.appendleft(cur)
+            path.remove(cur)
+            
+            return True
+        
+        
+        visited = set()
+        deq = collections.deque()
+        course_list = collections.defaultdict(list)
+        
+        for x,y in prerequisites:
+            course_list[y].append(x)
+        
+        
+        for k in range(numCourses):
+            if k not in visited:
+                path = set()
+                if not _dfs(k, path, deq):
+                    return []
+        
+        
+        return list(deq)
+        
+        
+            
