@@ -1,0 +1,38 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        
+        #creating the dp matrix
+        dp = [[float('inf')]*(amount+1) for _ in range(len(coins))]
+        
+        #base case
+        #initializing the first element's value to zero
+        dp[0][0] = 0
+        
+        #first coin value assignment
+        f_coin = coins[0]
+        
+        
+        #computing the change for the first value in the denominations list
+        for i in range(amount+1):
+            #if value is greater than the the first coin, then compute change for the denomination and amount using the recursive relation
+            if i >= f_coin:
+                dp[0][i] = dp[0][i-f_coin]+1
+        
+        
+        
+        #iterating through the denominations and the amount(rows and columns)
+        for i in range(1, len(coins)):
+            for j in range(amount+1):
+                
+                #recurrence relation
+                if j >= coins[i]:
+                    dp[i][j] = min(dp[i][j-coins[i]]+1, dp[i-1][j])
+                else:
+                    dp[i][j] = dp[i-1][j]
+        
+        #checks if a solution exists
+        if dp[-1][-1]==float('inf'):
+            return -1
+        
+        else:
+            return dp[-1][-1]
