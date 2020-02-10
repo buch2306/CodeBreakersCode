@@ -1,0 +1,23 @@
+def jumps(arr):
+
+    #initializing the dp array
+    dp = [float('inf')] * len(arr) 
+    
+    #first element of the dp array is initialized to 0; this is our base case
+    dp[0] = 0
+    
+    #going through the elements of the array; starting from index 1
+    for i in range(1, len(arr)):
+        
+        #checking elements until the ith position
+        for j in range(i):
+            
+            #if the jth element can reach i
+            if arr[j]+j >= i:
+                
+                #update the dp matrix's j value by taking the minimum between dp[i] and dp[j]+1
+                dp[i] = min(dp[i], dp[j]+1)
+    
+    
+    #returning the last element of the dp matrix
+    return dp[-1]
