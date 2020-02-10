@@ -1,0 +1,30 @@
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        
+        #creating the dp matrix
+        dp = [[0] * n for _ in range(m)]
+        
+        #the base condition
+        dp[-1][-1] = 1
+        
+        #decrementing the row and the column pointer
+        m=m-1
+        n=n-1
+        
+        #making the last column's values 1
+        for i in range(m-1,-1,-1):
+            dp[i][n] = dp[i+1][n]
+         
+        #making the last row's values 1
+        for j in range(n-1,-1,-1):
+            dp[m][j] = dp[m][j+1]
+        
+        
+        #computing solutions for each subproblem 
+        for i in range(m-1,-1,-1):
+            for j in range(n-1,-1,-1):
+                dp[i][j] = dp[i+1][j] + dp[i][j+1]
+        
+        #returning the solution
+        return dp[0][0]
+        
