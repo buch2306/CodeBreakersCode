@@ -1,0 +1,35 @@
+def edit(str1, str2):
+    
+    #obtaining the distance of two strings
+    m = len(str1)
+    n = len(str2)
+    
+    #creating the dp matrix
+    dp = [[0 for _ in range(n+1)]  for _ in range(m+1)]
+   
+      
+   #computing the solution
+    for i in range(m+1):
+        for j in range(n+1):
+            
+            #base case
+            if i==0:
+                dp[i][j] = j
+            
+            #base case
+            elif j==0:
+                dp[i][j] = i
+            
+            #if string characters are same, then replace operation which is the diagonal element in the dp matrix : dp[i-1][j-1]
+            elif str1[i-1] == str2[j-1]:
+                    dp[i][j] = dp[i-1][j-1]
+            
+            #find minimum of delete, insert, and adding operations
+            else:
+                    dp[i][j] = min(dp[i][j-1], dp[i-1][j-1], dp[i-1][j])+1
+    
+    
+    #returning the solution
+    return dp[-1][-1]
+        
+   
