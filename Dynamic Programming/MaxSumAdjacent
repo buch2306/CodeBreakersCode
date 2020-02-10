@@ -1,0 +1,29 @@
+def maxsum(arr):
+    
+    # if length of the array is zero, then return 0
+    if len(arr)==0:
+        return 0
+    
+    #if length of the array is one, then return first element
+    if len(arr)==1:
+        return arr[0]
+    
+    #base case of dp : second element is the first element in the array, and the first element is the max of the first and the second element of array
+    second = arr[0]
+    first = max(arr[0],arr[1])
+    
+    
+    #iterating through the array
+    for i in range(2, len(arr)):
+        
+        #calculating the current by taking the maximum value among the first and the second + arr[i] element because of the adjacency rule
+        cur = max(first, second + arr[i])
+        
+        #second is now first
+        second = first
+        
+        #first becomes the current value
+        first = cur
+            
+    #returning the maximum value
+    return first
