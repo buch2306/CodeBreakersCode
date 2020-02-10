@@ -1,0 +1,22 @@
+def numberOfWaysToMakeChange(n, denoms):
+    # Write your code here.
+    
+    #initializing the dp matrix
+    dp = [0] * (n+1)
+    
+    #base condition
+    dp[0] = 1
+    
+    
+    #iterating through all the denoms
+    for i in range(len(denoms)):
+        
+        #building the solution
+        for j in range(n+1):
+            
+            #if amount is greater than the denomination, then look for amount - denomination solution in the dp matrix and add to the current solution
+            if j >= denoms[i]:
+                dp[j] += dp[j-denoms[i]]
+    
+    #returning the solution
+    return dp[-1]
