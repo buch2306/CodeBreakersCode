@@ -1,0 +1,28 @@
+#substring pattern match
+def substring(string, pattern):
+    
+    #getting the length of the string
+    m = len(pattern)
+    
+    #getting the length of the pattern
+    n = len(string)
+    
+    #initializing the flag variable
+    flag = 0
+        
+    
+    #iterating through the string until (n - m)th element in the string
+    for i in range(n-m):
+        flag = 0
+        
+        #comparing with the pattern
+        for j in range(m):
+            if string[i+j] != pattern[j]:
+                flag = 1
+                break
+        #if flag is set to 0, then return True
+        if flag==0:
+            return True
+    
+    #in case substring doesn't exist
+    return False       
